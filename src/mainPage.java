@@ -1,7 +1,10 @@
 import java.awt.Container;
+import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.io.ObjectInputStream.GetField;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.IOException;
 
 import javax.swing.*;
 
@@ -30,6 +33,7 @@ public class mainPage {
 		GridBagConstraints c = new GridBagConstraints();
 		c.fill = GridBagConstraints.HORIZONTAL;
 		//MainPage Buttons
+		JLabel fbsHeader = new JLabel("FBS testing");
 		seleniumIDEButton(pane,c);
 		seleiumTestButton(pane, c);
 		runBackendTestButton(pane, c);
@@ -37,34 +41,59 @@ public class mainPage {
 	}
 	
 	private static void seleniumIDEButton(Container pane,GridBagConstraints c){
-		c.ipady=30;
-		c.gridwidth =3;
+		c.ipady=10;
+		c.gridwidth =1;
 		c.weightx = 0.0;
-		
-		setButtonGridAndText(pane,c,"Selenium IDE",0,0);
+		JButton button = new JButton("Selenium IDE");
+		c.fill = GridBagConstraints.HORIZONTAL;
+		c.gridx = 0;
+		c.gridy = 6;
+		pane.add(button, c);
+		button.addActionListener(executeSeleniumIDEAction());
 	}
 	
 	private static void seleiumTestButton(Container pane,GridBagConstraints c){
 		c.weightx = 0.5;
 		c.gridwidth =1;
-		setButtonGridAndText(pane,c,"Java Selenium Testi Koş",0,1);
+		JButton button = new JButton("Java Selenium Testi Koş");
+		c.fill = GridBagConstraints.HORIZONTAL;
+		c.gridx = 0;
+		c.gridy = 1;
+		pane.add(button, c);
 	}
 	private static void runBackendTestButton(Container pane, GridBagConstraints c){
 		c.weightx = 0.5;
 		c.gridwidth =1;
-		setButtonGridAndText(pane,c,"Backend Testi Koş",1,1);
+		JButton button = new JButton("Backend Testi Koş");
+		c.fill = GridBagConstraints.HORIZONTAL;
+		c.gridx = 1;
+		c.gridy = 1;
+		pane.add(button, c);
 	}
 	private static void runStressTestButton(Container pane,GridBagConstraints c){
 		c.weightx = 0.5;
 		c.gridwidth =1;
-		setButtonGridAndText(pane,c,"Stress Testi Koş",2,1);
-	}
-	private static void setButtonGridAndText(Container pane,GridBagConstraints c,String buttonText,int gridX,int gridY){
-		JButton button = new JButton(buttonText);
+		JButton button = new JButton("Stress Testi Koş");
 		c.fill = GridBagConstraints.HORIZONTAL;
-		c.gridx = gridX;
-		c.gridy = gridY;
+		c.gridx = 2;
+		c.gridy = 1;
 		pane.add(button, c);
+	}
+	public static ActionListener executeSeleniumIDEAction(){
+		return new ActionListener(){
+			public void actionPerformed(ActionEvent event) {
+				try {
+					String command = "/Applications/Firefox.app/Contents/MacOS/firefox-bin --chrome 'chrome://selenium-ide/content/'";
+					System.out.println(command);
+//					Process a = Runtime.getRuntime().exec("/Applications/Firefox.app/Contents/MacOS/firefox");
+					Process p = Runtime.getRuntime().exec(command);
+
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+		    }
+		};
 	}
 
 }
