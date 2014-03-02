@@ -1,5 +1,5 @@
-/* package com.example.tests;    bu satiri disable et, selenium ide saçma salak ekliyor bunu */
-package com.myself;
+/* package com.example.tests;    bu satiri disable et, selenium ide sa��ma salak ekliyor bunu */
+//package com.myself;
 import java.util.regex.Pattern;
 import java.util.concurrent.TimeUnit;
 import org.junit.*;
